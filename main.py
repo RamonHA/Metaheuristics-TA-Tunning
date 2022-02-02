@@ -68,7 +68,7 @@ def metaheuristic(inst):
     res = minimize(
         problem,
         algorithm,
-        ("n_gen", 10),
+        ("n_gen", 3),
         seed = 1,
         verbose = True
     )
