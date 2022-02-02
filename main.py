@@ -85,7 +85,7 @@ def metaheuristic(inst):
     return aux
 
 def func(inst):
-    print("My Function")
+    print("My Function for ", inst)
     inst = causality(inst)
 
     if inst is None: 
