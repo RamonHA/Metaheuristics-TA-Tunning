@@ -70,7 +70,7 @@ def metaheuristic(inst):
         algorithm,
         ("n_gen", 3),
         seed = 1,
-        verbose = True
+        verbose = False
     )
     # except Exception as e:
     #     print("{} with exception {}".format( inst, e ))
@@ -105,7 +105,7 @@ if __name__ == "__main__":
         end = date(2020,12,1), # If more recent data, simulation end time can be extended
         simulations=36, # Amount of simulations to run (based on the analysis frequency period)
         realistic=1,
-        verbose = 1,
+        verbose = 2,
         subdivision = "sector"
     )
 
