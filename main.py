@@ -8,6 +8,7 @@ from trading.metaheuristics.ta_tunning import TATunning
 from trading.assets.assets import TimeSeries
 from datetime import date
 import pandas as pd
+import matplotlib.pyplot as plt
 
 from sklearn.ensemble import RandomForestRegressor
 
@@ -68,7 +69,7 @@ def metaheuristic(inst):
     res = minimize(
         problem,
         algorithm,
-        ("n_gen", 3),
+        ("n_gen", 2),
         seed = 1,
         verbose = False
     )
@@ -96,6 +97,8 @@ def func(inst):
 
 if __name__ == "__main__":
 
+    portfolio_value = 100000
+
     s = Simulation(
         broker = "mevtaml", # change if different project name in configuration
         fiat = "mx",
@@ -106,7 +109,8 @@ if __name__ == "__main__":
         simulations=36, # Amount of simulations to run (based on the analysis frequency period)
         realistic=1,
         verbose = 2,
-        subdivision = "sector"
+        subdivision = "sector",
+        parallel = True
     )
 
 
@@ -120,5 +124,29 @@ if __name__ == "__main__":
                 "function":func
             }
         },
-        run = True
+        run = False
     )
+
+    for bt in [12, 24, 48]:
+        for r, o in [ ("efficientfrontier", "minvol"), ("efficientsemivariance", "minsemivariance"), ("efficientcvar", "mincvar"), ("efficientcdar", "mincdar") ]:
+
+            print( bt, r, o )
+
+            s.optimize(
+                balance_time = bt,
+                value = portfolio_value,
+                exp_return = True,
+                risk = r,
+                objective = o,
+                run = False
+            )
+
+
+    results = s.results_compilation()
+
+    print(results)
+    
+    df = s.behaviour( results.loc[ 0, "route" ] )
+
+    df[ "acc" ].plot()
+    plt.show()
