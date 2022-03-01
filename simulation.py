@@ -5,14 +5,17 @@ from trading.processes import Simulation
 
 from datetime import date
 import matplotlib.pyplot as plt
+import time
 
 from functions import *
 
 # Debbuging help
 # from trading.assets import Asset
-# inst = Asset( "ABBV.MX", frequency="1m", start = date(1998,11,1), end = date(2018,11,30), broker = "mevtaml", fiat = "mx", from_ = "db" )
+# inst = Asset( "TRAXIONA.MX", frequency="1m", start = date(1998,11,1), end = date(2018,11,30), broker = "mevtaml", fiat = "mx", from_ = "db" )
 
 if __name__ == "__main__":
+
+    st = time.time()
 
     portfolio_value = 100000
 
@@ -41,7 +44,7 @@ if __name__ == "__main__":
                 "function":func
             }
         },
-        run = False
+        run = True
     )
 
     for bt in [12, 24, 48]:
@@ -55,7 +58,7 @@ if __name__ == "__main__":
                 exp_return = True,
                 risk = r,
                 objective = o,
-                run = False
+                run = True
             )
 
 
@@ -67,3 +70,5 @@ if __name__ == "__main__":
 
     df[ "acc" ].plot()
     plt.show()
+
+    print("Execution time: ", time.time() - st)
