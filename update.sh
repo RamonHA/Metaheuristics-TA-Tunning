@@ -1,6 +1,5 @@
-# Update assets info
-
 #!/bin/bash
+# Update assets info
 
 historic_download -broker mevtaml -fiat mx -frequency 1m -from "yahoo" -verbose
 

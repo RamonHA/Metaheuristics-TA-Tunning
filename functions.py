@@ -9,7 +9,7 @@ from trading.assets.assets import TimeSeries
 from trading.mev.mev import mevs
 from trading.metaheuristics.ta_tunning import TATunning
 
-GEN = 20
+GEN = 25
 
 def causality(inst):
 
