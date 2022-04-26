@@ -7,7 +7,7 @@ from sklearn.ensemble import RandomForestRegressor
 
 from trading.assets.assets import TimeSeries
 from trading.mev.mev import mevs
-from trading.metaheuristics.ta_tunning import TATunning
+from trading.metaheuristics.ta_tunning import TATunningProblem
 
 GEN = 25
 
@@ -46,7 +46,7 @@ def metaheuristic(inst):
         dither = "scalar",
     )
 
-    problem = TATunning(
+    problem = TATunningProblem(
         asset = inst,
         regr = RandomForestRegressor(),
         xl = 3,

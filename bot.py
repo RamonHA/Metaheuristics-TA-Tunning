@@ -37,7 +37,7 @@ def bot(args):
         exp_return=True,
         risk = args.opt,
         objective=args.target,
-        target_return = args.return_target
+        target_return = float(args.return_target)
     )
 
     b.run()
@@ -47,7 +47,7 @@ if __name__ == "__main__":
     
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("-portfolio-value", "-pv", dest="pv", help = "Portfolio Value", nargs='?', const=0, type=int)
+    parser.add_argument("-portfolio-value", "-pv", dest="pv", help = "Portfolio Value", nargs='?', const=0.0, type=float)
     parser.add_argument("-comission", "-c", dest="comission", help = "Broker's comission", nargs='?', const=0, type=float)
     parser.add_argument("-end", "-e", dest="end", help = "Month to make prediction of. Months beginning. Set Default to date.today()", nargs='?', const=date.today(), type=str)
     parser.add_argument("-opt", "-o", dest="opt", help = "Optimization objective", nargs='?', const="efficientcdar", type=str)
